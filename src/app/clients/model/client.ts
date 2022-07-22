@@ -1,6 +1,6 @@
 export interface Client {
-  _idClient: string;
+  idClient: bigint;
   nameClient: string;
   emailClient: string;
-  birthDayClient: string;
+  birthDateClient: string;
 }

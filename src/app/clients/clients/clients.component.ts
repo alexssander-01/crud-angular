@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Client} from "../model/client";
+import {ClientsService} from "../services/clients.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-client',
@@ -8,16 +10,14 @@ import {Client} from "../model/client";
 })
 export class ClientsComponent implements OnInit {
 
-  clients: Client[];
-  displayedColumns = ['_idClient','nameClient','emailClient','birthDayClient'];
-  constructor() {
-    this.clients = [{
-      _idClient:"1", nameClient:"alex",emailClient:"alex@gmail.com",birthDayClient:"01-01-2010"
-    }];
+  clients$: Observable<Client[]>;
+  displayedColumns = ['idClient','nameClient','emailClient','birthDateClient'];
+
+  constructor(private clientsService: ClientsService) {
+    this.clients$ = this.clientsService.listClient();
   }
 
   ngOnInit(): void {
-
   }
 
 }
