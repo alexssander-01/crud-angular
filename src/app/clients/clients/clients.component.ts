@@ -40,7 +40,11 @@ export class ClientsComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.router.navigate(['new'],{relativeTo: this.route});
+    this.router.navigate(['form'],{relativeTo: this.route});
   }
 
+  onUpdate(idClient: Client) {
+    this.router.navigate(['form/'+idClient],{relativeTo: this.route});
+    console.log(idClient);
+  }
 }

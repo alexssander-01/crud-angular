@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-toolbar color="primary">customer list
+  <mat-toolbar color="primary">Lista de Clientes
   </mat-toolbar>
   <div *ngIf="clients$ | async as clients else loading">
     <table mat-table [dataSource]="clients" class="mat-elevation-z8">
@@ -36,7 +36,7 @@
           </button>
         </mat-header-cell>
         <mat-cell *matCellDef="let client">
-          <button mat-icon-button color="primary" aria-label="Editar cliente">
+          <button mat-icon-button color="primary" aria-label="Editar cliente" (click)="onUpdate(client.idClient)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" aria-label="Remover cliente">
