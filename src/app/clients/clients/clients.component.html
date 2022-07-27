@@ -24,7 +24,7 @@
       <!-- birthDayClient Column -->
       <ng-container matColumnDef="birthDateClient">
         <th mat-header-cell *matHeaderCellDef> Birth Date Client</th>
-        <td mat-cell *matCellDef="let client"> {{client.birthDateClient}} </td>
+        <td mat-cell *matCellDef="let client"> {{client.birthDateClient | date:'dd-MM-y'}} </td>
       </ng-container>
 
       <!-- Actions Column -->

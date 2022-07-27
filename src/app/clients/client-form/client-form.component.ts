@@ -24,22 +24,37 @@ export class ClientFormComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute) {
 
-    //this.service.getIdClient(route.snapshot.paramMap.get('id')).subscribe(data => console.log(data));
     this.form = this.formBuilder.group({
-      nameClient: [null],
-      emailClient: [null],
-      birthDateClient: [null]
+      idClient: null,
+      nameClient: null,
+      emailClient: null,
+      birthDateClient: null
     });
 
     this._adapter.setLocale('pt-BR');
-
   }
 
   ngOnInit(): void {
+    this.service.getIdClient(this.route.snapshot.paramMap.get('id')).subscribe(data =>{
+      this.form = this.formBuilder.group({
+        idClient: data.idClient,
+        nameClient: data.nameClient,
+        emailClient: data.emailClient,
+        birthDateClient: data.birthDateClient+'T03:00:00'
+      });
+      console.log(data);
+    })
   }
 
-  onSubmit() {
-    this.service.saveClient(this.form.value).subscribe(data => this.onSuccess(data.nameClient), error => {
+  onSubmitAdd() {
+    this.service.saveClient(this.form.value).subscribe(data => this.onSuccess(`${data.nameClient} salvo`), error => {
+      console.log(error);
+      this.onError()
+    });
+  }
+
+  onSubmitUp() {
+    this.service.updateClient(this.form.value).subscribe(data => this.onSuccess(`${data.nameClient} atualizado`), error => {
       console.log(error);
       this.onError()
     });
@@ -49,8 +64,12 @@ export class ClientFormComponent implements OnInit {
     this.location.back();
   }
 
+  showButton(): boolean{
+    return this.form.value.idClient != null;
+  }
+
   private onSuccess(text: string) {
-    this.snackBar.open(`Cliente ${text} salvo com sucesso!`, '', {duration: 5000});
+    this.snackBar.open(`Cliente ${text} com sucesso!`, '', {duration: 5000});
     this.onCancel();
   }
 

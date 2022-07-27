@@ -45,6 +45,5 @@ export class ClientsComponent implements OnInit {
 
   onUpdate(idClient: Client) {
     this.router.navigate(['form/'+idClient],{relativeTo: this.route});
-    console.log(idClient);
   }
 }

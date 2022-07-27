@@ -20,7 +20,8 @@
       </mat-form-field>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+        <button *ngIf="!showButton()" mat-raised-button color="primary" (click)="onSubmitAdd()">Salvar</button>
+        <button *ngIf="showButton()" mat-raised-button color="primary" (click)="onSubmitUp()">Atualizar</button>
         <button mat-raised-button (click)="onCancel()">Cancelar</button>
       </mat-card-actions>
 
