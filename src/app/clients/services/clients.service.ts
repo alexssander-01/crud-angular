@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Client} from "../model/client";
 import {HttpClient} from "@angular/common/http";
-import {first} from "rxjs";
+import {first, Observable} from "rxjs";
 import * as moment from "moment/moment";
 import {environment} from "../../../environments/environment";
 
@@ -32,10 +32,16 @@ export class ClientsService {
   }
 
   getIdClient(idClient: string | null) {
-    return this.httpClient.get<Client>(`${this.baseUrl}/client/${idClient}`).pipe(first());
+    if(idClient != null)
+      return this.httpClient.get<Client>(`${this.baseUrl}/client/${idClient}`).pipe(first());
+    return new Observable<Client>();
   }
 
   updateClient(record: Client){
     return this.httpClient.put<Client>(`${this.baseUrl}/client/${record.idClient}`,record).pipe(first());
+  }
+
+  deleteClient(idClient: number){
+    return this.httpClient.delete<string>(`${this.baseUrl}/client/${idClient}`).pipe(first());
   }
 }
