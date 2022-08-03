@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Client} from "../model/client";
 import {HttpClient} from "@angular/common/http";
 import {first, Observable} from "rxjs";
-import * as moment from "moment/moment";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -23,11 +22,6 @@ export class ClientsService {
   }
 
   saveClient(record: Client){
-    console.log(record.birthDateClient);
-    if(record.birthDateClient != null){
-      let newDate: moment.Moment = moment.utc(record.birthDateClient).local();
-      record.birthDateClient = newDate.format("YYYY-MM-DD");
-    }
     return this.httpClient.post<Client>(`${this.baseUrl}/client`,record).pipe(first());
   }
 

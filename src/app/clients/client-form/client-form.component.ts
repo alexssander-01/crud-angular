@@ -42,7 +42,6 @@ export class ClientFormComponent implements OnInit {
         emailClient: data.emailClient,
         birthDateClient: data.birthDateClient+'T03:00:00'
       });
-      console.log(data);
     })
   }
 
